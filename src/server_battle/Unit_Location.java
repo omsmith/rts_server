@@ -7,82 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class Unit_Element{ 
-	public final Position posn; 
-	public final Integer unique_ID; 
-	public Unit_Element(Position Posn, Integer Unique_ID) { 
-		this.posn = Posn; 
-		this.unique_ID = Unique_ID; 
-	} 
 
-	public Position getPosn() {
-		return posn;
-	}
 
-	public Integer getUnique_ID() {
-		return unique_ID;
-	}
-}
-
-class Unit_SortedList{
-	private List<Unit_Element> unit_List = new ArrayList<Unit_Element>();
-	private Character xory;
-
-	public Unit_SortedList(Character XorY){
-		if(XorY == 'x' || XorY == 'X')
-			xory = 'x';
-		else if(XorY == 'y' || XorY == 'Y')
-			xory = 'y';
-	}
-
-	static final Comparator<Unit_Element> byX = new Comparator<Unit_Element>() {
-		public int compare(Unit_Element u1, Unit_Element u2) {
-			return u1.getPosn().getx() - u2.getPosn().getx();
-		}
-	};
-
-	static final Comparator<Unit_Element> byY = new Comparator<Unit_Element>() {
-		public int compare(Unit_Element u1, Unit_Element u2) {
-			return u1.getPosn().gety() - u2.getPosn().gety();
-		}
-	};
-
-	public ArrayList<Unit_Element> SelectWithinBounds(Integer Lower_Bound, Integer Upper_Bound){
-		ArrayList<Unit_Element> Units_Within_Range = new ArrayList<Unit_Element>();
-		
-		if(xory == 'x'){
-			for (Unit_Element t : unit_List)
-				if(t.posn.getx() > Lower_Bound && t.posn.getx() < Upper_Bound)
-					Units_Within_Range.add(t);
-		}
-		else{
-			for (Unit_Element t : unit_List)
-				if(t.posn.gety() > Lower_Bound && t.posn.gety() < Upper_Bound)
-					Units_Within_Range.add(t);
-		}
-		return Units_Within_Range;
-	}
-	
-	public boolean add(Position posn, Integer Unique_ID) {
-		Unit_Element addedUnit = new Unit_Element(posn, Unique_ID);
-		int index;
-		if(xory == 'x')
-			index = Collections.binarySearch(this.unit_List, addedUnit, byX);
-		else
-			index = Collections.binarySearch(this.unit_List, addedUnit, byY);
-		if (index < 0) index = ~index;
-		this.unit_List.add(index, addedUnit);
-		return true;
-	}
-}
-
-public class Unit_LocationandSelection {
+public class Unit_Location{
 	Map<Integer,String> unitTable=new HashMap<Integer, String>();
 	Unit_SortedList unitPositionTablebyX =new Unit_SortedList('x');
 	Unit_SortedList unitPositionTablebyY =new Unit_SortedList('y');
 	
-	//Parameters
-	//Single Unit Selection Threshold
 	private final Integer paramsust = 100;
 
 	public ArrayList<Unit_Element> Box_Selection(Position Top_Left, Position Bottom_Right){
@@ -120,5 +51,76 @@ public class Unit_LocationandSelection {
 		}
 		
 		return Closest_Unit;
+	}
+	
+	class Unit_SortedList{
+		private List<Unit_Element> unit_List = new ArrayList<Unit_Element>();
+		private Character xory;
+
+
+		
+		public Unit_SortedList(Character XorY){
+			if(XorY == 'x' || XorY == 'X')
+				xory = 'x';
+			else if(XorY == 'y' || XorY == 'Y')
+				xory = 'y';
+		}
+
+		final Comparator<Unit_Element> byX = new Comparator<Unit_Element>() {
+			public int compare(Unit_Element u1, Unit_Element u2) {
+				return u1.getPosn().getx() - u2.getPosn().getx();
+			}
+		};
+
+		final Comparator<Unit_Element> byY = new Comparator<Unit_Element>() {
+			public int compare(Unit_Element u1, Unit_Element u2) {
+				return u1.getPosn().gety() - u2.getPosn().gety();
+			}
+		};
+
+		public ArrayList<Unit_Element> SelectWithinBounds(Integer Lower_Bound, Integer Upper_Bound){
+			ArrayList<Unit_Element> Units_Within_Range = new ArrayList<Unit_Element>();
+			
+			if(xory == 'x'){
+				for (Unit_Element t : unit_List)
+					if(t.posn.getx() > Lower_Bound && t.posn.getx() < Upper_Bound)
+						Units_Within_Range.add(t);
+			}
+			else{
+				for (Unit_Element t : unit_List)
+					if(t.posn.gety() > Lower_Bound && t.posn.gety() < Upper_Bound)
+						Units_Within_Range.add(t);
+			}
+			return Units_Within_Range;
+		}
+		
+		public boolean add(Position posn, Integer Unique_ID) {
+			Unit_Element addedUnit = new Unit_Element(posn, Unique_ID);
+			int index;
+			if(xory == 'x')
+				index = Collections.binarySearch(this.unit_List, addedUnit, byX);
+			else
+				index = Collections.binarySearch(this.unit_List, addedUnit, byY);
+			if (index < 0) index = ~index;
+			this.unit_List.add(index, addedUnit);
+			return true;
+		}
+	}
+	
+	class Unit_Element{ 
+		public final Position posn; 
+		public final Integer unique_ID; 
+		public Unit_Element(Position Posn, Integer Unique_ID) { 
+			this.posn = Posn; 
+			this.unique_ID = Unique_ID; 
+		} 
+
+		public Position getPosn() {
+			return posn;
+		}
+
+		public Integer getUnique_ID() {
+			return unique_ID;
+		}
 	}
 }
