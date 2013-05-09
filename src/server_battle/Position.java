@@ -39,7 +39,7 @@ public class Position {
 	public Integer getx() {
 		return x;
 	}
-
+	
 	public Integer gety() {
 		return y;
 	}

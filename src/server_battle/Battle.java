@@ -1,7 +1,9 @@
 package server_battle;
 
-import java.util.*;
+//import java.util.*;
 
 public class Battle {
-	Unit_Location Units = new Unit_Location();
+	Unit_Location unit_Location = new Unit_Location();
+	Unit_Storage units = new Unit_Storage();
+	ToDoQueue toDoQueue = new ToDoQueue();
 }
