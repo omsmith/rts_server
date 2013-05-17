@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ToDoQueue {
-	long startTime = System.nanoTime();
+	long startTime = System.currentTimeMillis();
 	private List<Activity> toDoQueue = new ArrayList<Activity>();
 	private static final AtomicLong UniqueProcessId = new AtomicLong();
 	
 	
 	public long add(Activity activity){
-		Integer index;
+		int index;
 		index = Collections.binarySearch(this.toDoQueue, activity, byRequestedExecutionTime);
 		if(index < 0)
 			index = ~index;
@@ -23,11 +23,15 @@ public class ToDoQueue {
 		toDoQueue.add(index, activity);
 		return process_ID;
 	}
-	public boolean remove(){
-		return true;
-	}
-	public boolean modify(){
-		return true;
+	public Activity remove(long Activity_ID){
+		int index = 0;
+		for(Activity activity : toDoQueue){
+			if(activity.getProcess_ID() == Activity_ID)
+				return toDoQueue.remove(index);
+			else
+				index++;
+		}
+		return null;
 	}
 	
 	final Comparator<Activity> byRequestedExecutionTime = new Comparator<Activity>() {

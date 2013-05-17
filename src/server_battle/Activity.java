@@ -1,6 +1,6 @@
 package server_battle;
 
-public abstract class Activity {
+public class Activity {
 	private final long requestedExecutionTime;
 	//private final long addedTime;
 	private final Integer process_ID;
