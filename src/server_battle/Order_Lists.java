@@ -5,12 +5,19 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class Order_Lists {
-public static AtomicLong Unique_Queue_ID = new AtomicLong();
+public static AtomicLong Unique_Order_ID = new AtomicLong();
 private List<Order> Outstanding_Orders = new ArrayList<Order>();
+private final ToDoQueue toDoQueue;
+
+public Order_Lists(ToDoQueue toDoQueue){
+	this.toDoQueue = toDoQueue;
+}
 
 public long add(Order order){
 	order.setOrder_ID(GetandIncrement());
 	Outstanding_Orders.add(order);
+	Activity activity = new Activity(200,order.getOrder_ID());
+	toDoQueue.add(activity);
 	return order.getOrder_ID();
 }
 
@@ -26,6 +33,6 @@ public Order remove(long order_ID){
 }
 
 private synchronized long GetandIncrement(){
-	return Unique_Queue_ID.getAndIncrement();
+	return Unique_Order_ID.getAndIncrement();
 }
 }
