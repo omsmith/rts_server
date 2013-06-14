@@ -62,9 +62,18 @@ public class UnitLocation {
 	
 	// update unit location on map, TODO
 	void MoveUnit(final AtomicInteger uniqueID, Position newPosition) {
+		
+		//probably put some check here to see if this is a valid place to move to.
+		
 		BasicDBObject query = new BasicDBObject("uniqueID", uniqueID);
-		BasicDBObject update = new BasicDBObject();
+		BasicDBObject update = (BasicDBObject) units.findOne(query);
 
+		update.removeField("loc");
+		BasicDBObject loc = new BasicDBObject();					// create location entry
+		loc.put ("x", newPosition.getx());							// add x coordinate
+		loc.put ("y", newPosition.gety());							// add y coordinate
+		update.put("loc", loc);
+		
 		units.update(query, update);
 	
 	}
