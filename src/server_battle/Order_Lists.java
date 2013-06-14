@@ -26,8 +26,9 @@ public void update(long order_ID){
 	for(Order x:Outstanding_Orders){
 		if(x.getOrder_ID() == order_ID){
 			x.update();
+			break;
 		}	
-		break;
+		
 		
 	}
 }
