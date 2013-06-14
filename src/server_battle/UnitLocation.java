@@ -52,7 +52,7 @@ public class UnitLocation {
 	// adds unit to map, should be functional
 	void AddUnit(final AtomicInteger uniqueID, Position unitPosition) {
 		BasicDBObject unit = new BasicDBObject("name", "MongoDB");
-		unit.put("uniqueID", "1105409");
+		unit.put("uniqueID", uniqueID);
 		BasicDBObject loc = new BasicDBObject();
 		loc.put ("x", unitPosition.getx());
 		loc.put("y", unitPosition.gety());
