@@ -7,6 +7,7 @@ import java.util.List;
 
 public class ToDoQueue {
 	long startTime = System.currentTimeMillis();
+	private List<Order_Lists> orderLists = new ArrayList<Order_Lists>();
 	private List<Activity> toDoQueue = new ArrayList<Activity>();
 	
 	public void add(Activity activity){
@@ -16,6 +17,15 @@ public class ToDoQueue {
 			index = ~index;
 		toDoQueue.add(index, activity);
 	}
+	
+	public Activity peek(){
+		return toDoQueue.get(0);
+	}
+	
+	public Activity pop(){
+		return toDoQueue.remove(0);
+	}
+	
 	public Activity remove(long Activity_ID){
 		int index = 0;
 		for(Activity activity : toDoQueue){
@@ -25,6 +35,10 @@ public class ToDoQueue {
 				index++;
 		}
 		return null;
+	}
+	
+	public void RegisterOrderList(Order_Lists newOrderList){
+		orderLists.add(newOrderList);
 	}
 	
 	final Comparator<Activity> byRequestedExecutionTime = new Comparator<Activity>() {

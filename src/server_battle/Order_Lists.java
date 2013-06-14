@@ -11,14 +11,24 @@ private final ToDoQueue toDoQueue;
 
 public Order_Lists(ToDoQueue toDoQueue){
 	this.toDoQueue = toDoQueue;
+	toDoQueue.RegisterOrderList(this);
 }
 
 public long add(Order order){
 	order.setOrder_ID(GetandIncrement());
 	Outstanding_Orders.add(order);
-	Activity activity = new Activity(200,order.getOrder_ID());
+	Activity activity = new Activity(200,order.getOrder_ID(),this);
 	toDoQueue.add(activity);
 	return order.getOrder_ID();
+}
+
+public void update(long order_ID){
+	for(Order x:Outstanding_Orders){
+		if(x.getOrder_ID() == order_ID){
+			x.update();
+			break;
+		}
+	}
 }
 
 public Order remove(long order_ID){
