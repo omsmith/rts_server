@@ -51,13 +51,13 @@ public class UnitLocation {
 	
 	// adds unit to map, should be functional
 	void AddUnit(final AtomicInteger uniqueID, Position unitPosition) {
-		BasicDBObject unit = new BasicDBObject("name", "MongoDB");
-		unit.put("uniqueID", uniqueID);
-		BasicDBObject loc = new BasicDBObject();
-		loc.put ("x", unitPosition.getx());
-		loc.put("y", unitPosition.gety());
-		unit.put("loc", loc);
-		units.insert(unit);
+		BasicDBObject unit = new BasicDBObject("name", "MongoDB"); 	// create entry for unit
+		unit.put("uniqueID", uniqueID);								// add unique id to entry
+		BasicDBObject loc = new BasicDBObject();					// create location entry
+		loc.put ("x", unitPosition.getx());							// add x coordinate
+		loc.put("y", unitPosition.gety());							// add y coordinate
+		unit.put("loc", loc);										// add location entry to unit entry
+		units.insert(unit);											// add unit to units collection
 	}
 	
 	// update unit location on map, TODO
