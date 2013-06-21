@@ -18,13 +18,16 @@ public class Marine extends Unit{
 	//private List<Subscription> Subscriptions = new ArrayList<Subscription>();
 	
 	public Marine(ToDoQueue toDoQueue){
-		super(toDoQueue);
+		super(toDoQueue, "Marine", 17);
 		Healthmax = 45;
 		Healthregen = 1;
 		Manamax = 20;
 		Manaregen = 1;
 		Armour = 1;
 		Movementspeed = 2;
+		Modifiers.add("terran");
+		Modifiers.add("biological");
+		Modifiers.add("light");
 		
 		
 	}

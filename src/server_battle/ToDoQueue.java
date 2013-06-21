@@ -46,6 +46,7 @@ public class ToDoQueue {
 				return x;
 			}
 		}
+		return orderLists.get(0);
 	}
 	
 	final Comparator<Activity> byRequestedExecutionTime = new Comparator<Activity>() {
