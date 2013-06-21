@@ -8,10 +8,16 @@ public abstract class Order_Lists {
 public static AtomicLong Unique_Order_ID = new AtomicLong();
 private List<Order> Outstanding_Orders = new ArrayList<Order>();
 private final ToDoQueue toDoQueue;
+private final String name;
 
-public Order_Lists(ToDoQueue toDoQueue){
+public Order_Lists(ToDoQueue toDoQueue, String name){
 	this.toDoQueue = toDoQueue;
+	this.name = name;
 	toDoQueue.RegisterOrderList(this);
+}
+
+public String getName(){
+	return name;
 }
 
 public long add(Order order){
@@ -27,9 +33,7 @@ public void update(long order_ID){
 		if(x.getOrder_ID() == order_ID){
 			x.update();
 			break;
-		}	
-		
-		
+		}
 	}
 }
 

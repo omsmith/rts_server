@@ -40,6 +40,13 @@ public class ToDoQueue {
 	public void RegisterOrderList(Order_Lists newOrderList){
 		orderLists.add(newOrderList);
 	}
+	public Order_Lists FindOrderList(String order_List){
+		for(Order_Lists x: orderLists){
+			if(x.getName() == order_List){
+				return x;
+			}
+		}
+	}
 	
 	final Comparator<Activity> byRequestedExecutionTime = new Comparator<Activity>() {
 		public int compare(Activity a1, Activity a2) {
