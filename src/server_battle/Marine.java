@@ -60,11 +60,11 @@ public class Marine extends Unit{
 		
 		isupdaterequired();
 	}
-	private boolean isupdaterequired(){
+	public boolean isupdaterequired(){
 		if(Healthbar < (Healthmax + Healthmaxmod) 
 				| Manabar < (Manamax + Manamaxmod)){
 			if(updateOrder == 0){
-				UpdateOrder updateorder = new UpdateOrder();
+				UpdateOrder updateorder = new UpdateOrder(this,1);
 				updateOrder = toDoQueue.FindOrderList("Update").add(updateorder);
 			}
 		return true;

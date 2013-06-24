@@ -12,18 +12,13 @@ public class TheQThread implements Runnable {
 		Activity activity;
 		for(;;){
 			l.lock();
-				if(gameQueue.peek().getRequestedExecutionTime() <= System.currentTimeMillis()){
-					activity = gameQueue.pop();
-				}
-				else{
-					activity = null;
-				}
+			if(gameQueue.peek().getRequestedExecutionTime() <= System.currentTimeMillis())
+				activity = gameQueue.pop();
+			else
+				activity = null;
 			l.unlock();
-			if(activity != null){
-				activity.getOrder_Lists().update(activity.getProcess_ID());
-			}
-				
-				
+			if(activity != null)
+				gameQueue.add(activity.getOrder_Lists().update(activity.getProcess_ID()));
 		}
 	}
 	

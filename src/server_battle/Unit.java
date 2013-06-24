@@ -13,13 +13,16 @@ public abstract class Unit {
 	protected long updateOrder;
 	private final String name;
 	
-	
 	public Unit (ToDoQueue toDoQueue, String name, int buildTime)	{
 		uniqueId = uniqueIdCounter.getAndIncrement();
 		this.toDoQueue = toDoQueue;
 		this.buildTime = buildTime;
 		this.name = name;
 	}
+	
+	public void update(){isupdaterequired();}
+	public boolean isupdaterequired(){return false;}
+	
 	public String getName() {
 		return name;
 	}
