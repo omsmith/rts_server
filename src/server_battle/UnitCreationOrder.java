@@ -1,5 +1,7 @@
 package server_battle;
 
+import units.Unit;
+
 public class UnitCreationOrder extends Order{
 	private Unit Unit;
 	private Position Position;

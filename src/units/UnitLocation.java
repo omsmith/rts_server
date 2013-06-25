@@ -9,7 +9,6 @@ import com.mongodb.DBCollection;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.DBCursor;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import server_battle.Position;
 
@@ -44,7 +43,7 @@ public class UnitLocation {
 	}
 	
 	// adds unit to map, should be functional
-	void AddUnit(final AtomicInteger uniqueID, Position unitPosition) {
+	void AddUnit(final int uniqueID, Position unitPosition) {
 		BasicDBObject unit = new BasicDBObject("name", "MongoDB"); 	// create entry for unit
 		unit.put("uniqueID", uniqueID);								// add unique id to entry
 		BasicDBObject loc = new BasicDBObject();					// create location entry
@@ -55,7 +54,7 @@ public class UnitLocation {
 	}
 	
 	// update unit location on map, TODO
-	void MoveUnit(final AtomicInteger uniqueID, Position newPosition) {
+	void MoveUnit(final int uniqueID, Position newPosition) {
 		
 		//probably put some check here to see if this is a valid place to move to.
 		
@@ -73,7 +72,7 @@ public class UnitLocation {
 	}
 	
 	// get unit by unique id, should be functional
-	void GetUnit(final AtomicInteger uniqueID)	{
+	void GetUnit(final int uniqueID)	{
 		BasicDBObject query = new BasicDBObject("uniqueID", uniqueID);
 		DBCursor cursor = units.find(query);
 		
@@ -89,15 +88,15 @@ public class UnitLocation {
 	}
 	
 	
-	ArrayList<AtomicInteger> FindUnitsNear(Position unitPosition)	{ // should be functional, TODO: by default returns nearest 50 units, will update 
+	ArrayList<Integer> FindUnitsNear(Position unitPosition)	{ // should be functional, TODO: by default returns nearest 50 units, will update 
 		BasicDBObject query = new BasicDBObject("$near", new double[] {unitPosition.getx(), unitPosition.gety()});
 		DBCursor cursor = units.find(query);
-		ArrayList<AtomicInteger> unitList = new ArrayList<AtomicInteger>();
+		ArrayList<Integer> unitList = new ArrayList<Integer>();
 		try {
 		while(cursor.hasNext()) {
 			DBObject result = cursor.next();
 			System.out.println(result);
-			unitList.add((AtomicInteger) result.get("uniqueId"));
+			unitList.add((Integer) result.get("uniqueId"));
 	   }
 		} finally {
 		   cursor.close();

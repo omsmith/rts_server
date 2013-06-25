@@ -1,7 +1,10 @@
-package server_battle;
+package units;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import server_battle.ToDoQueue;
+import server_battle.UpdateOrder;
 
 public class Marine extends Unit{
 	private final int Healthmax, Healthregen;

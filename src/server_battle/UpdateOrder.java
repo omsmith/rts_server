@@ -1,5 +1,7 @@
 package server_battle;
 
+import units.Unit;
+
 public class UpdateOrder extends Order{
 private final Unit unit;
 

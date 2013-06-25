@@ -1,8 +1,9 @@
-package server_battle;
+package units;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import server_battle.Unit;
+import server_battle.ToDoQueue;
+import units.Unit;
 
 public abstract class Unit {
 	private static final AtomicInteger uniqueIdCounter = new AtomicInteger();
