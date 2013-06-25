@@ -1,6 +1,6 @@
 package server_battle;
 
-public abstract class Order {
+public abstract class Order implements Runnable {
 private long Order_ID;
 private final long firsttime;
 
@@ -14,8 +14,10 @@ public long getfirsttime(){
 public long getOrder_ID(){
 	return Order_ID;
 }
-public Activity update(){return null;}
 public void setOrder_ID(long order_ID){
 	Order_ID = order_ID;
 }
+
+public void run() {}
+
 }
