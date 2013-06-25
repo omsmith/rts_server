@@ -1,16 +1,12 @@
 package server_battle;
 
-<<<<<<< HEAD
+
 import units.Unit;
 
-public class UnitCreationOrder extends Order{
-=======
 public class UnitCreationOrder extends Order {
 	private static final long TICK_TIME = 1000;
 	
 	private final OrderQueue queue;
-	
->>>>>>> 61a7c2aa9a3595eed1858763ef6ea6e280cab5ef
 	private Unit Unit;
 	private Position Position;
 	
