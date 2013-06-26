@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class OrderService implements Runnable {
 	private static final long POLL_PERIOD = 10;
-	private static final TimeUnit POLL_PERIOD_UNIT = TimeUnit.SECONDS;
+	private static final TimeUnit POLL_PERIOD_UNIT = TimeUnit.MILLISECONDS;
 	
 	private final OrderQueue queue;
 	private final ScheduledExecutorService poll;
