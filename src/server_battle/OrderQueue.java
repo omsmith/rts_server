@@ -38,13 +38,18 @@ public class OrderQueue {
 		inner.put(new OEWrapper(order, System.currentTimeMillis() + executionWait));
 	}
 
-	public Order take() {
-		for (;;) {
-			OEWrapper order = inner.peek();
-			if(order != null && order.executionTime <= System.currentTimeMillis()) {
-				return inner.poll().order;
-			}
-		}
+	public boolean ready() {
+		OEWrapper order = inner.peek();
+		return order != null && order.executionTime <= System.currentTimeMillis();
 	}
+
+	public Order poll() {
+		OEWrapper order = inner.poll();
+		if(order == null) {
+			return null;
+		}
+		return order.order;
+	}
+	
 }
 
