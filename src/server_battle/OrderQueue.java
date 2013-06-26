@@ -21,7 +21,10 @@ public class OrderQueue {
 
 		@Override
 		public boolean equals(Object other) {
-			if(other instanceof OEWrapper || other instanceof Order) {
+			if(other instanceof OEWrapper) {
+				return this.order.equals(((OEWrapper)other).order);
+			}
+			if(other instanceof Order) {
 				return this.order.equals(other);
 			}
 			return false;
