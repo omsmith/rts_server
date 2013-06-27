@@ -11,6 +11,7 @@ public class UnitCreationOrder extends Order {
 	private Position Position;
 	
 	private long remainingBuildTime;
+	private long previousTickTime;
 	
 	public UnitCreationOrder(Unit unit, Position position/*,Player player*/, OrderQueue queue){
 		super(unit.getbuildTime() > 1 ? 1 : unit.getbuildTime());
@@ -20,13 +21,16 @@ public class UnitCreationOrder extends Order {
 		this.Position = position;
 		
 		this.remainingBuildTime = unit.getbuildTime();
+		this.previousTickTime = System.currentTimeMillis();
 		
 		queue.add(this, TICK_TIME);
 	}
 	
 	@Override
 	public void run() {
-		remainingBuildTime -= TICK_TIME;
+		long currentTime = System.currentTimeMillis();
+		remainingBuildTime -= currentTime - previousTickTime;
+		previousTickTime = currentTime;
 		
 		if(remainingBuildTime >= TICK_TIME) {
 			queue.add(this, TICK_TIME);
@@ -35,5 +39,5 @@ public class UnitCreationOrder extends Order {
 		} else {
 			//create the unit here, getgameQueue().Database.addUnit(Unit,Position/*,possibleBuildArea*/);
 		}
-	}	
+	}
 }
